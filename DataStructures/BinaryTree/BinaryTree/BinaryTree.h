@@ -14,20 +14,23 @@ struct Node
 		Node* right;
 		Node* parent;
 	};
+
+
 template<typename T >
 class Tree {
 private:
-	
+
 	Node<T>* root = NULL;
 	void printHelper(Node<T>*&);
 	void printHelper2(Node<T>*&);
 	void addHelper(T, Node<T>*&);
 	void createItem(T, Node<T>*&, Node<T>*&);
 	Node<T>* searchHelper(T x, Node<T>*& item);
-	
+	void print(Node<T>* item);
 
-public:
+public:	
 	void print();
+	
 	void add(T);
 	Node<T>* search(T);
 	
@@ -85,7 +88,23 @@ void Tree<T>::addHelper(T x, Node<T>*& item)
 template<typename T >
 void Tree<T>::print()
 {
-	printHelper2(root);
+	if (root!= NULL)
+	{
+		cout << root->key;
+		print(root->left);
+		print(root->right);
+	}
+}
+
+template<typename T >
+void Tree<T>::print(Node<T>* item)
+{
+	if (item != NULL)
+	{
+		cout << item->key;
+		print(item->left);
+		print(item->right);
+	}
 }
 
 template<typename T >
