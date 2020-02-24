@@ -7,6 +7,7 @@ using namespace std;
 
 int main()
 {
+	Node <int> *b;
 	Tree <int> a;
 	a.add(5);
 	a.add(3);
@@ -16,10 +17,10 @@ int main()
 	a.add(8);
 	a.add(6);
 
-	/*cout << a.root->left->data;
-	cout << a.root->data;
-	cout << a.root->left->left->data;*/
 	a.print();
+	b = a.search(3);
+	cout << endl << b->left->key<<b->parent->key<<b->right->key;
+
 
 
 }
