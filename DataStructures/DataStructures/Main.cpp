@@ -16,11 +16,16 @@ int main()
 	a.add(2);
 	a.add(8);
 	a.add(6);
+	a.add(9);
+	a.add(10);
+	a.add(7);
 
 	a.print();
-	b = a.search(3);
-	cout << endl << b->left->key<<b->parent->key<<b->right->key;
-
+	
+	
+	a.remove(3);
+	cout << endl;
+	a.print();
 
 
 }
