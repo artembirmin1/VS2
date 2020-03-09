@@ -1,5 +1,6 @@
-﻿#ifndef _BINARYTREE_H_ 
-#define _BINARYTHEE_H_ 
+﻿
+#ifndef _BINARYTREE_CPP_
+#define _BINARYTREE_CPP_
 
 #include "BinaryTree.h" 
 #include <iostream> 
@@ -241,6 +242,38 @@ void Tree<T>::print(Node<T>* item)
 		print(item->left);	
 		print(item->right);
 	}
+}
+
+template<typename T >
+Node<T>* Tree<T>::search(string x)
+{
+	Node<T>* item = root;
+	if (x == "min")
+		item = getMin();
+	else if (x == "max")
+		item = getMax();
+	return item;
+}
+template<typename T >
+Node<T>* Tree<T>::getMin()
+{
+	Node<T>* item = root;
+	while (item->left != NULL)
+	{
+		item = item->left;
+	}
+	return item;
+}
+
+template<typename T >
+Node<T>* Tree<T>::getMax()
+{
+	Node<T>* item = root;
+	while (item->right != NULL)
+	{
+		item = item->right;
+	}
+	return item;
 }
 
 #endif

@@ -1,13 +1,14 @@
 
 
 #include "BinaryTree.h" 
+#include"LinkedList.h"
 #include <iostream> 
 
 using namespace std;
 
 int main()
 {
-	Node <int> *b;
+	
 	Tree <int> a;
 	a.add(5);
 	a.add(7);
@@ -25,12 +26,16 @@ int main()
 
 	a.print();
 	
+
 	
 	
 	cout << endl;
 	a.print();
 	cout << endl << a.successor(15)->key;
 	cout << endl << a.predecessor(30)->key;
+	cout << endl << a.getMax()->key;
+	cout << endl << a.getMin()->key;
+
 
 
 }

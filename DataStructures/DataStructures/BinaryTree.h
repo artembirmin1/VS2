@@ -1,20 +1,19 @@
 #pragma once
+#ifndef _BINARYTREE_H_
+#define _BINARYTREE_H_
 
-#ifndef _BINARYTREE_H_ 
-#define _BINARYTHEE_H_ 
-
-#include <iostream> 
+#include <iostream>
 
 using namespace std;
 
 template<typename T >
 struct Node
-	{
+{
 		T key;
 		Node* left;
 		Node* right;
 		Node* parent;
-	};
+};
 
 template<typename T >
 class Tree {
@@ -31,11 +30,15 @@ public:
 	void remove(T k, bool d = false);
 	void removeSubtree(Node<T>*);
 	Node<T>* search(T);
+	Node<T>* search(string);
 	Node<T>* successor(T);
 	Node<T>* predecessor(T);
+	Node<T>* getMin();
+	Node<T>* getMax();
 	void print();
+
 };
 
-#include"BinaryTree.cpp";
+#include "BinaryTree.cpp"
 
 #endif
