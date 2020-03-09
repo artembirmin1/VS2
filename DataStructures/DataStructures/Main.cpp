@@ -10,22 +10,27 @@ int main()
 	Node <int> *b;
 	Tree <int> a;
 	a.add(5);
-	a.add(3);
-	a.add(0);
-	a.add(4);
-	a.add(2);
-	a.add(8);
-	a.add(6);
-	a.add(9);
-	a.add(10);
 	a.add(7);
+	
+
+	a.add(15);
+	a.add(30);
+	a.add(32);
+	a.add(29);
+	a.add(27);
+	a.add(28);
+	a.add(13);
+	
+	
 
 	a.print();
 	
 	
-	a.remove(3);
+	
 	cout << endl;
 	a.print();
+	cout << endl << a.successor(15)->key;
+	cout << endl << a.predecessor(30)->key;
 
 
 }

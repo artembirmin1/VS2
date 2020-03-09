@@ -21,17 +21,14 @@ class Tree {
 private:
 
 	Node<T>* root = NULL;
-	
-	
 	void createItem(T, Node<T>*&, Node<T>*&);
 	Node<T>* search(T x, Node<T>*& item);
 	void print(Node<T>* item);
 	void add(T, Node<T>*);
-
+	Node<T>* takeOutSuccessor(Node<T>*);
 public:	
 	void remove(T k, bool d = false);
 	void removeSubtree(Node<T>*);
-	void parentNull(Node<T>*);
 	void print();
 	void add(T);
 	Node<T>* search(T);
@@ -56,7 +53,7 @@ void Tree<T>::remove(T x, bool d)
 		{
 			Node<T>* p = item->parent;
 			Node<T>* v;
-			item->left != NULL ? v = item->left : v = item->left;
+			item->left != NULL ? v = item->left : v = item->right;
 			p->left == item ? p->left = v : p->right = v;
 			delete item;
 		}
@@ -69,15 +66,10 @@ void Tree<T>::remove(T x, bool d)
 	else if (item->left != NULL && item->right != NULL)
 	{
 		if (d == false)
-	{
-			Node<T>* v = successor(x);
+		{
+			Node<T>* v = takeOutSuccessor(successor(x));
 			v->left = item->left;
-			if (item->right->key != v->key)
-				v->right = item->right;
-			else if (item->right->key != v->key)
-				v->right = NULL;
-
-			//v->parent->key > v->key ? v->parent->left = NULL : v->parent->right = NULL;
+			v->right = item->right;
 			v->parent = item->parent;
 			item->parent->key > item->key ? item->parent->left = v : item->parent->right = v;
 			delete item;
@@ -166,9 +158,9 @@ void Tree<T>::createItem(T x, Node<T>*& item, Node<T>*& par)
 template<typename T >
 void Tree<T>::print()
 {
-	if (root!= NULL)
+	if (root != NULL)
 	{
-		cout << root->key;
+		cout << root->key <<" ";
 		print(root->left);
 		print(root->right);
 	}
@@ -179,7 +171,7 @@ void Tree<T>::print(Node<T>* item)
 {
 	if (item != NULL)
 	{
-		cout << item->key;
+		cout << item->key<<" ";
 		print(item->left);	
 		print(item->right);
 	}
@@ -227,7 +219,7 @@ Node<T>* Tree<T>::successor(T x)
 		v = v->right;
 		if (v->left == NULL)
 			return v;
-		while (v->left != NULL || v->right != NULL)
+		while (v->left != NULL )
 		{
 			v = v->left;
 		}
@@ -239,9 +231,21 @@ Node<T>* Tree<T>::successor(T x)
 template<typename T >
 Node<T>* Tree<T>::predecessor(T x)
 {
-	
+	Node<T>* v = search(x);
+	if (v->left == NULL && v->right == NULL)
+		return v;
+	else
+	{
+		v = v->left;
+		if (v->right == NULL)
+			return v;
+		while (v->left != NULL || v->right != NULL)
+		{
+			v = v->right;
+		}
+		return v;
+	}
 }
-
 
 template<typename T >
 void Tree<T>::removeSubtree(Node<T>* item)
@@ -254,6 +258,22 @@ void Tree<T>::removeSubtree(Node<T>* item)
 	delete item;
 }
 
+template<typename T >
+Node<T>* Tree<T>::takeOutSuccessor(Node<T>* item)
+{	
+	Node<T>* p = item->parent;
+	if (item->left != NULL || item->right != NULL) 
+	{
+		Node<T>* r = item->right;
+		item->right = NULL;
+		p->left = r;
+	}
+	else
+	{
+		p->left = NULL;
+	}
+	return item;
+}
 
 #include"BinaryTree.cpp";
 
