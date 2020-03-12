@@ -8,19 +8,28 @@
 template<typename T >
 void Tree<T>::add(T x)
 {
+	
 	Node<T>* item = root;
 	if (root != NULL)
 	{
+		sp++;
 		if (x > item->key)
 			if (item->right != NULL)
+			{	
+				sp++;
 				add(x, item->right);
+			}
 			else
 			{
 				createItem(x, item->right, item);
+				
 			}
 		else if (x < item->key)
 			if (item->left != NULL)
+			{
+				sp++;
 				add(x, item->left);
+			}
 			else
 			{
 				createItem(x, item->left, item);
@@ -28,6 +37,7 @@ void Tree<T>::add(T x)
 	}
 	else
 	{
+		sp++;
 		root = new Node<T>;
 		root->parent = NULL;
 		root->key = x;
@@ -43,14 +53,22 @@ void Tree<T>::add(T x, Node<T>* item)
 	{
 		if (x > item->key)
 			if (item->right != NULL)
+			{	
+				sp++;
 				add(x, item->right);
+			}
+				
 			else
 			{
 				createItem(x, item->right, item);
 			}
 		else if (x < item->key)
 			if (item->left != NULL)
+			{	
+				sp++;
 				add(x, item->left);
+			}
+				
 			else
 			{
 				createItem(x, item->left, item);
@@ -58,6 +76,7 @@ void Tree<T>::add(T x, Node<T>* item)
 	}
 	else
 	{
+		sp++;
 		root = new Node<T>;
 		root->parent = NULL;
 		root->key = x;
@@ -69,11 +88,14 @@ void Tree<T>::add(T x, Node<T>* item)
 template<typename T >
 void Tree<T>::createItem(T x, Node<T>*& item, Node<T>*& par)
 {
+	sp++;
 	item = new Node<T>;
 	item->parent = par;
 	item->key = x;
 	item->left = NULL;
 	item->right = NULL;
+	if (sp > smax) smax = sp;
+	sp = 0;
 }
 
 template<typename T >
@@ -223,28 +245,6 @@ Node<T>* Tree<T>::predecessor(T x)
 }
 
 template<typename T >
-void Tree<T>::print()
-{
-	if (root != NULL)
-	{
-		cout << root->key <<" ";
-		print(root->left);
-		print(root->right);
-	}
-}
-
-template<typename T >
-void Tree<T>::print(Node<T>* item)
-{
-	if (item != NULL)
-	{
-		cout << item->key<<" ";
-		print(item->left);	
-		print(item->right);
-	}
-}
-
-template<typename T >
 Node<T>* Tree<T>::search(string x)
 {
 	Node<T>* item = root;
@@ -276,4 +276,31 @@ Node<T>* Tree<T>::getMax()
 	return item;
 }
 
+template<typename T >
+size_t Tree<T>::getDeep()
+{
+	return smax;
+}
+
+template<typename T >
+void Tree<T>::print()
+{
+	if (root != NULL)
+	{
+		cout << root->key <<" ";
+		print(root->left);
+		print(root->right);
+	}
+}
+
+template<typename T >
+void Tree<T>::print(Node<T>* item)
+{
+	if (item != NULL)
+	{
+		cout << item->key<<" ";
+		print(item->left);	
+		print(item->right);
+	}
+}
 #endif
