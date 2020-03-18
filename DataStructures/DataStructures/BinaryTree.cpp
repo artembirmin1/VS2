@@ -12,22 +12,18 @@ void Tree<T>::add(T x)
 	Node<T>* item = root;
 	if (root != NULL)
 	{
-		sp++;
 		if (x > item->key)
 			if (item->right != NULL)
 			{	
-				sp++;
 				add(x, item->right);
 			}
 			else
 			{
 				createItem(x, item->right, item);
-				
 			}
 		else if (x < item->key)
 			if (item->left != NULL)
 			{
-				sp++;
 				add(x, item->left);
 			}
 			else
@@ -36,8 +32,7 @@ void Tree<T>::add(T x)
 			}
 	}
 	else
-	{
-		sp++;
+	{	
 		root = new Node<T>;
 		root->parent = NULL;
 		root->key = x;
@@ -54,7 +49,6 @@ void Tree<T>::add(T x, Node<T>* item)
 		if (x > item->key)
 			if (item->right != NULL)
 			{	
-				sp++;
 				add(x, item->right);
 			}
 				
@@ -65,7 +59,6 @@ void Tree<T>::add(T x, Node<T>* item)
 		else if (x < item->key)
 			if (item->left != NULL)
 			{	
-				sp++;
 				add(x, item->left);
 			}
 				
@@ -76,7 +69,6 @@ void Tree<T>::add(T x, Node<T>* item)
 	}
 	else
 	{
-		sp++;
 		root = new Node<T>;
 		root->parent = NULL;
 		root->key = x;
@@ -88,14 +80,12 @@ void Tree<T>::add(T x, Node<T>* item)
 template<typename T >
 void Tree<T>::createItem(T x, Node<T>*& item, Node<T>*& par)
 {
-	sp++;
 	item = new Node<T>;
 	item->parent = par;
 	item->key = x;
 	item->left = NULL;
 	item->right = NULL;
-	if (sp > smax) smax = sp;
-	sp = 0;
+	
 }
 
 template<typename T >
@@ -277,9 +267,38 @@ Node<T>* Tree<T>::getMax()
 }
 
 template<typename T >
-size_t Tree<T>::getDeep()
+size_t Tree<T>::getDepth()
 {
-	return smax;
+	Node<T>* item = root;
+	if (item == NULL)
+		return 0;
+	if (item->left == NULL && item->right == NULL)
+		return 1;
+	if (getDepth(item->left) > getDepth(item->right))
+		return 1 + getDepth(item->left);
+	else
+		return 1 + getDepth(item->right);
+	if (item->left != NULL)
+		return 1 + getDepth(item->left);
+	if (item->right != NULL)
+		return 1 + getDepth(item->right);
+}
+
+template<typename T >
+size_t Tree<T>::getDepth(Node<T>* item)
+{
+	if (item == NULL)
+		return 0;
+	if (item->left == NULL && item->right == NULL)
+		return 1;
+	if (getDepth(item->left) > getDepth(item->right))
+		return 1 + getDepth(item->left);
+	else
+		return 1 + getDepth(item->right);
+	if (item->left != NULL)
+		return 1 + getDepth(item->left);
+	if (item->right != NULL)
+		return 1 + getDepth(item->right);
 }
 
 template<typename T >

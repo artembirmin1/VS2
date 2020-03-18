@@ -18,12 +18,12 @@ struct Node
 template<typename T >
 class Tree {
 private:
-	size_t smax=0, sp=0;
 	Node<T>* root = NULL;
 	void add(T, Node<T>*);
 	void createItem(T, Node<T>*&, Node<T>*&);	
 	Node<T>* takeOutSuccessor(Node<T>*);
 	Node<T>* search(T x, Node<T>*& item);
+	size_t getDepth(Node<T>*);
 	void print(Node<T>* item);
 	
 public:
@@ -36,7 +36,7 @@ public:
 	Node<T>* predecessor(T);
 	Node<T>* getMin();
 	Node<T>* getMax();
-	size_t getDeep();
+	size_t getDepth();
 	void print();
 };
 
