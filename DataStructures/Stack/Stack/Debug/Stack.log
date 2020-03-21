@@ -1,5 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ConsoleApplication1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Source.cpp
-  Stack.cpp
-  Создание кода...
-  Stack.vcxproj -> D:\USER\Documents\VS\Data\Stack\Debug\Stack.exe
